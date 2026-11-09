@@ -43,6 +43,43 @@ In rural health settings across India, Accredited Social Health Activist (ASHA) 
 
 ---
 
+## 🏗️ System Architecture
+
+Sahaayak Pro is built using separate modules that work together to provide offline healthcare assistance.
+
+### How the System Works
+
+```mermaid
+flowchart TD
+    A[ASHA Worker] --> B[Frontend Interface]
+    B --> C[Flask Backend]
+    C --> D[Triage Engine]
+    D --> E[Risk Classification]
+    C --> F[SQLite Database]
+    C --> G[Referral PDF Generator]
+    F --> H[Offline Sync Worker]
+```
+
+### Main Components
+
+| Component | Purpose |
+|---|---|
+| Frontend | Displays the application interface |
+| Backend | Handles application requests |
+| Triage Engine | Evaluates symptoms using predefined rules |
+| Database | Stores patient and assessment records |
+| Sync Worker | Handles pending data synchronization |
+| Referral Generator | Creates printable referral documents |
+
+### Patient Assessment Process
+
+1. ASHA worker enters patient information.
+2. Symptoms are selected or entered.
+3. The triage engine evaluates the symptoms.
+4. The system displays a risk classification.
+5. The case is saved locally.
+6. A referral document can be generated when required.
+
 ## 📁 Project Structure
 
 ```
