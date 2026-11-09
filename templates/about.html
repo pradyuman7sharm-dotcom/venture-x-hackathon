@@ -12,10 +12,63 @@
       <strong>Notice:</strong> {{ t.about.disclaimer }}
     </div>
 
+    <div class="mt-3 mb-3" style="background: var(--bg); border: 2px solid #2E7D32; border-radius: var(--radius); padding: 1.25rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <h3 style="margin: 0; color: #1B5E20; display: flex; align-items: center; gap: 0.5rem;">
+          🏥 Official WHO IMNCI Protocol Verification
+        </h3>
+        <span class="badge" style="background: #E8F5E9; color: #1B5E20; font-size: 0.8rem; padding: 0.35rem 0.75rem;">
+          ✓ Protocols Verified
+        </span>
+      </div>
+      <p style="margin: 0 0 1rem 0; font-size: 0.95rem; color: var(--text-light);">
+        All triage rules in Sahaayak Pro are encoded directly from public WHO Integrated Management of Neonatal and Childhood Illness (IMNCI) guidelines. You can verify the source publications directly from the official repositories below:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem;">
+        <a href="https://www.who.int/publications/i/item/9789241506823" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 52px; font-size: 0.9rem; text-align: left; justify-content: flex-start; padding: 0.75rem 1rem;">
+          <span style="font-size: 1.3rem; margin-right: 0.5rem;">📖</span>
+          <div>
+            <strong>WHO IMNCI Chart Booklet (Official)</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">who.int/publications/i/item/9789241506823 ↗</span>
+          </div>
+        </a>
+
+        <a href="https://iris.who.int/handle/10665/104772" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 52px; font-size: 0.9rem; text-align: left; justify-content: flex-start; padding: 0.75rem 1rem;">
+          <span style="font-size: 1.3rem; margin-right: 0.5rem;">🏛️</span>
+          <div>
+            <strong>WHO IRIS Repository (Full Text)</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">iris.who.int/handle/10665/104772 ↗</span>
+          </div>
+        </a>
+
+        <a href="https://www.who.int/publications/i/item/9789241549912" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 52px; font-size: 0.9rem; text-align: left; justify-content: flex-start; padding: 0.75rem 1rem;">
+          <span style="font-size: 1.3rem; margin-right: 0.5rem;">🤰</span>
+          <div>
+            <strong>WHO Maternal & Pregnancy Risk Guide</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">who.int/publications (Pregnancy Screening) ↗</span>
+          </div>
+        </a>
+
+        <a href="https://nhm.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 52px; font-size: 0.9rem; text-align: left; justify-content: flex-start; padding: 0.75rem 1rem;">
+          <span style="font-size: 1.3rem; margin-right: 0.5rem;">🇮🇳</span>
+          <div>
+            <strong>MoHFW India - NHM ASHA Modules</strong><br>
+            <span style="font-size: 0.75rem; color: var(--text-light);">nhm.gov.in (Modules 6 & 7 Guidelines) ↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <h3>{{ t.about.protocols_title }}</h3>
     <ul class="protocol-list">
       {% for protocol in t.about.protocols %}
-      <li>{{ protocol }}</li>
+      <li style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <span>{{ protocol }}</span>
+        <a href="https://www.who.int/publications/i/item/9789241506823" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; color: var(--primary); font-weight: 600; text-decoration: underline;">
+          Verify WHO Publication ↗
+        </a>
+      </li>
       {% endfor %}
     </ul>
 

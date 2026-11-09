@@ -25,11 +25,11 @@
       </a>
 
       <ul class="nav-links">
-        <li><a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">{{ t.nav.home }}</a></li>
-        <li><a href="{{ url_for('new_case') }}" class="nav-link {% if request.endpoint == 'new_case' %}active{% endif %}">{{ t.nav.new_case }}</a></li>
-        <li><a href="{{ url_for('cases') }}" class="nav-link {% if request.endpoint == 'cases' %}active{% endif %}">{{ t.nav.cases }}</a></li>
-        <li><a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">{{ t.nav.about }}</a></li>
-        <li><a href="{{ url_for('status') }}" class="nav-link {% if request.endpoint == 'status' %}active{% endif %}">{{ t.nav.status }}</a></li>
+        <li><a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}"><span>{{ t.nav.home }}</span></a></li>
+        <li><a href="{{ url_for('new_case') }}" class="nav-link {% if request.endpoint == 'new_case' %}active{% endif %}"><span>{{ t.nav.new_case }}</span></a></li>
+        <li><a href="{{ url_for('cases') }}" class="nav-link {% if request.endpoint == 'cases' %}active{% endif %}"><span>{{ t.nav.cases }}</span></a></li>
+        <li><a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}"><span>{{ t.nav.about }}</span></a></li>
+        <li><a href="{{ url_for('status') }}" class="nav-link {% if request.endpoint == 'status' %}active{% endif %}"><span>{{ t.nav.status }}</span></a></li>
       </ul>
 
       <div class="navbar-right">
@@ -131,19 +131,19 @@
   <nav class="nav-bottom no-print">
     <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">
       <span class="nav-icon">🏠</span>
-      <span>{{ t.nav.home }}</span>
+      <span class="nav-label">{{ t.nav.home }}</span>
     </a>
     <a href="{{ url_for('new_case') }}" class="{% if request.endpoint == 'new_case' %}active{% endif %}">
       <span class="nav-icon">➕</span>
-      <span>{{ t.nav.new_case }}</span>
+      <span class="nav-label">{{ t.nav.new_case }}</span>
     </a>
     <a href="{{ url_for('cases') }}" class="{% if request.endpoint == 'cases' %}active{% endif %}">
       <span class="nav-icon">📋</span>
-      <span>{{ t.nav.cases }}</span>
+      <span class="nav-label">{{ t.nav.cases }}</span>
     </a>
     <a href="{{ url_for('status') }}" class="{% if request.endpoint == 'status' %}active{% endif %}">
       <span class="nav-icon">📶</span>
-      <span>{{ t.nav.status }}</span>
+      <span class="nav-label">{{ t.nav.status }}</span>
     </a>
   </nav>
 

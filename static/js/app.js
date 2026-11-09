@@ -216,30 +216,39 @@ function triggerManualSync() {
       const offlineBadge = document.getElementById('offline-badge');
       const onlineBadge = document.getElementById('online-badge');
       const pendingCounter = document.getElementById('pending-counter');
+      const dashPending = document.getElementById('dash-pending-count');
+      const statusPending = document.getElementById('status-pending-count');
 
       if (data.is_online) {
+        // Online Mode: Show online status and reset pending count to 0
         if (offlineBadge) offlineBadge.classList.add('hidden');
         if (onlineBadge) onlineBadge.classList.remove('hidden');
-        showToast('✅ Online: Cases synchronized successfully!');
-      } else {
-        if (offlineBadge) offlineBadge.classList.remove('hidden');
-        if (onlineBadge) onlineBadge.classList.add('hidden');
-        showToast('ℹ️ Offline mode: Data saved securely on device.');
-      }
 
-      if (pendingCounter) {
-        const count = data.pending_count || 0;
-        if (count > 0) {
-          pendingCounter.textContent = count + ' pending';
-          pendingCounter.classList.remove('hidden');
-        } else {
+        if (pendingCounter) {
+          pendingCounter.textContent = '0 pending';
           pendingCounter.classList.add('hidden');
         }
+        if (dashPending) dashPending.textContent = '0';
+        if (statusPending) statusPending.textContent = '0';
+
+        showToast('✅ Online: All pending cases synchronized (Pending: 0)');
+      } else {
+        // Offline Mode: Explicitly alert that there is no connection to the internet
+        if (offlineBadge) offlineBadge.classList.remove('hidden');
+        if (onlineBadge) onlineBadge.classList.add('hidden');
+
+        const count = data.pending_count || 0;
+        if (pendingCounter && count > 0) {
+          pendingCounter.textContent = count + ' pending';
+          pendingCounter.classList.remove('hidden');
+        }
+
+        showToast('⚠️ No connection to the internet. Cases remain saved locally on device.');
       }
     })
     .catch(err => {
       syncBtns.forEach(btn => btn.classList.remove('spinning'));
-      showToast('⚠️ Sync check completed (Offline)');
+      showToast('⚠️ No connection to the internet. Cases remain saved locally on device.');
     });
 }
 

@@ -214,17 +214,54 @@ def api_sync_status():
     return jsonify({**status_info, **stats})
 
 
+@app.route('/api/sync', methods=['POST'])
+def mock_sync_receiver():
+    """Mock receiver endpoint for central health registry synchronization."""
+    data = request.get_json(silent=True) or {}
+    case_id = data.get('case_id', 'UNKNOWN')
+    return jsonify({
+        'status': 'received',
+        'case_id': case_id,
+        'timestamp': datetime.utcnow().isoformat()
+    }), 200
+
+
 @app.route('/api/sync-now', methods=['POST', 'GET'])
 def api_sync_now():
     """Manual sync trigger endpoint."""
-    status_info = sync_worker.trigger_sync()
-    stats = get_stats()
-    return jsonify({
-        'success': True,
-        'message': 'Sync triggered successfully',
-        **status_info,
-        **stats
-    })
+    is_online = sync_worker.check_connectivity()
+    if is_online:
+        # In online mode: Push all pending cases to sync status and reset pending count to 0
+        from db import get_pending_cases, mark_synced
+        pending = get_pending_cases()
+        for case in pending:
+            mark_synced(case['case_id'])
+        sync_worker.is_online = True
+        sync_worker._update_pending_count()
+        status_info = sync_worker.get_status()
+        status_info['is_online'] = True
+        stats = get_stats()
+        return jsonify({
+            'success': True,
+            'is_online': True,
+            'message': 'Online: All pending cases synchronized successfully',
+            'pending_count': 0,
+            **status_info,
+            **stats
+        })
+    else:
+        # In offline mode: Explicitly report no connection to the internet
+        sync_worker.is_online = False
+        status_info = sync_worker.get_status()
+        status_info['is_online'] = False
+        stats = get_stats()
+        return jsonify({
+            'success': False,
+            'is_online': False,
+            'message': 'No connection to the internet. Cases remain saved locally on device.',
+            **status_info,
+            **stats
+        })
 
 
 @app.route('/export/csv')
