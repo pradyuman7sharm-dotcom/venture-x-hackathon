@@ -149,8 +149,125 @@ function printCard() {
   window.print();
 }
 
+// ---- Dark Mode Management ----
+function initTheme() {
+  const saved = localStorage.getItem('sahaayak_theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  updateThemeButton(theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const target = (current === 'dark') ? 'light' : 'dark';
+
+  if (target === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  localStorage.setItem('sahaayak_theme', target);
+  updateThemeButton(target);
+  showToast(target === 'dark' ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️');
+}
+
+function updateThemeButton(theme) {
+  const btn = document.getElementById('theme-toggle-btn');
+  if (btn) {
+    btn.innerHTML = (theme === 'dark') ? '☀️' : '🌙';
+    btn.title = (theme === 'dark') ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+  }
+}
+
+// ---- Toast Notification ----
+function showToast(message) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.className = 'toast-notification';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = message;
+  toast.classList.add('show');
+  setTimeout(function() {
+    toast.classList.remove('show');
+  }, 3200);
+}
+
+// ---- Manual Sync Function ----
+function triggerManualSync() {
+  const syncBtns = document.querySelectorAll('.sync-btn');
+  syncBtns.forEach(btn => btn.classList.add('spinning'));
+
+  showToast('🔄 Checking connectivity & syncing...');
+
+  fetch('/api/sync-now', { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      syncBtns.forEach(btn => btn.classList.remove('spinning'));
+
+      const offlineBadge = document.getElementById('offline-badge');
+      const onlineBadge = document.getElementById('online-badge');
+      const pendingCounter = document.getElementById('pending-counter');
+
+      if (data.is_online) {
+        if (offlineBadge) offlineBadge.classList.add('hidden');
+        if (onlineBadge) onlineBadge.classList.remove('hidden');
+        showToast('✅ Online: Cases synchronized successfully!');
+      } else {
+        if (offlineBadge) offlineBadge.classList.remove('hidden');
+        if (onlineBadge) onlineBadge.classList.add('hidden');
+        showToast('ℹ️ Offline mode: Data saved securely on device.');
+      }
+
+      if (pendingCounter) {
+        const count = data.pending_count || 0;
+        if (count > 0) {
+          pendingCounter.textContent = count + ' pending';
+          pendingCounter.classList.remove('hidden');
+        } else {
+          pendingCounter.classList.add('hidden');
+        }
+      }
+    })
+    .catch(err => {
+      syncBtns.forEach(btn => btn.classList.remove('spinning'));
+      showToast('⚠️ Sync check completed (Offline)');
+    });
+}
+
+// ---- Security Verification Modal ----
+function openSecurityModal() {
+  const modal = document.getElementById('security-modal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeSecurityModal() {
+  const modal = document.getElementById('security-modal');
+  if (modal) modal.classList.remove('open');
+}
+
+// Auto-init theme immediately to prevent screen flash
+initTheme();
+
 document.addEventListener('DOMContentLoaded', function() {
+  initTheme();
   initVoiceInput();
   initSymptomCheckboxes();
   pollSyncStatus();
+
+  // Close modal on click outside
+  const modal = document.getElementById('security-modal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeSecurityModal();
+    });
+  }
 });

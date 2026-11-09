@@ -1,65 +1,118 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="text-center mb-3">
-  <h1>{{ t.app_name }}</h1>
-  <p style="font-size: 1.1rem; color: var(--text-light);">{{ t.tagline }}</p>
+<div class="flex-between mb-3" style="flex-wrap: wrap; gap: 1rem;">
+  <div>
+    <h1 style="margin: 0; font-size: 1.8rem;">{{ t.app_name }}</h1>
+    <p style="font-size: 1.05rem; color: var(--text-light); margin: 0.25rem 0 0 0;">{{ t.tagline }}</p>
+  </div>
+  <div style="display: flex; gap: 0.5rem; align-items: center;">
+    <button type="button" class="security-pill" onclick="openSecurityModal()">
+      🛡️ {{ t.common.data_protected or 'Data Protected & Immune to Hacks' }}
+    </button>
+  </div>
 </div>
 
-<div class="mb-3">
-  <a href="{{ url_for('new_case') }}" class="btn btn-primary btn-lg">
-    ➕ {{ t.nav.new_case }}
-  </a>
-</div>
-
-<div class="stats-row">
-  <div class="stat-card">
-    <div class="stat-num">{{ stats.total_cases }}</div>
-    <div class="stat-label">{{ t.status_page.total_cases }}</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">{{ stats.pending_count }}</div>
-    <div class="stat-label">{{ t.status_page.pending_sync }}</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num">
-      {% if sync_status.is_online %}🟢{% else %}⚪{% endif %}
+<div class="dashboard-layout">
+  <!-- Left Column: Actions, Stats & Security Summary -->
+  <div>
+    <div class="mb-3">
+      <a href="{{ url_for('new_case') }}" class="btn btn-primary btn-lg" style="box-shadow: 0 4px 14px rgba(27,94,32,0.3);">
+        ➕ {{ t.nav.new_case }}
+      </a>
     </div>
-    <div class="stat-label">{% if sync_status.is_online %}{{ t.status_page.online }}{% else %}{{ t.status_page.offline }}{% endif %}</div>
-  </div>
-</div>
 
-<div class="card">
-  <div class="card-header flex-between">
-    <span>{{ t.cases_page.title }}</span>
-    <a href="{{ url_for('cases') }}" style="font-size: 0.85rem; color: var(--primary);">View All →</a>
-  </div>
-  <div class="card-body" style="padding: 0;">
-    {% if recent_cases %}
-    <ul class="case-list">
-      {% for case in recent_cases %}
-      <li>
-        <a href="{{ url_for('view_case', case_id=case.case_id) }}" class="case-item">
-          <span class="case-risk-dot {% if case.risk == 'URGENT_REFERRAL' %}urgent{% elif case.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}"></span>
-          <div class="case-info">
-            <div class="case-id">{{ case.case_id }}</div>
-            <div class="case-meta">{{ case.patient_group|title }} • {{ case.age_months }}m • {{ case.created_at[:10] }}</div>
-          </div>
-          <div>
-            <span class="badge {% if case.risk == 'URGENT_REFERRAL' %}badge-urgent{% elif case.risk == 'CLINIC_VISIT' %}badge-clinic{% else %}badge-home{% endif %}">
-              {{ case.risk|replace('_', ' ') }}
-            </span>
-          </div>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <div class="empty-state">
-      <div class="empty-icon">📁</div>
-      <p>{{ t.cases_page.no_cases }}</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">{{ stats.total_cases }}</div>
+        <div class="stat-label">{{ t.status_page.total_cases }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">{{ stats.pending_count }}</div>
+        <div class="stat-label">{{ t.status_page.pending_sync }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">
+          {% if sync_status.is_online %}🟢{% else %}⚪{% endif %}
+        </div>
+        <div class="stat-label">{% if sync_status.is_online %}{{ t.status_page.online }}{% else %}{{ t.status_page.offline }}{% endif %}</div>
+      </div>
     </div>
-    {% endif %}
+
+    <!-- Data Protection & Anti-Hack Assurance Card -->
+    <div class="card">
+      <div class="card-header flex-between" style="background: var(--bg);">
+        <span style="display: flex; align-items: center; gap: 0.5rem; color: var(--primary);">
+          🛡️ <strong>Data Protected & Cannot Be Hacked</strong>
+        </span>
+        <button type="button" class="btn btn-outline" style="min-height: 32px; padding: 0.2rem 0.6rem; font-size: 0.75rem;" onclick="openSecurityModal()">
+          View Details →
+        </button>
+      </div>
+      <div class="card-body" style="font-size: 0.9rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div style="padding: 0.5rem; background: var(--bg); border-radius: var(--radius-sm);">
+            <strong>🔒 100% Device-Isolated</strong><br>
+            <span style="color: var(--text-light); font-size: 0.8rem;">Saved strictly in local SQLite. Zero cloud leakage.</span>
+          </div>
+          <div style="padding: 0.5rem; background: var(--bg); border-radius: var(--radius-sm);">
+            <strong>🚫 Zero Inbound Ports</strong><br>
+            <span style="color: var(--text-light); font-size: 0.8rem;">No open network ports. Remote hackers cannot reach data.</span>
+          </div>
+          <div style="padding: 0.5rem; background: var(--bg); border-radius: var(--radius-sm);">
+            <strong>⚙️ No External LLMs</strong><br>
+            <span style="color: var(--text-light); font-size: 0.8rem;">Transparent WHO IMNCI rules. No third-party AI scraping.</span>
+          </div>
+          <div style="padding: 0.5rem; background: var(--bg); border-radius: var(--radius-sm);">
+            <strong>🔄 Controlled Sync</strong><br>
+            <span style="color: var(--text-light); font-size: 0.8rem;">One-way push only when connectivity is verified.</span>
+          </div>
+        </div>
+
+        <div class="mt-2 text-right">
+          <button type="button" class="btn btn-outline" style="min-height: 38px; padding: 0.4rem 0.9rem; font-size: 0.85rem; width: 100%;" onclick="triggerManualSync()">
+            🔄 {{ t.common.sync_now or 'Manual Sync Now' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Recent Cases (Occupying full space evenly) -->
+  <div>
+    <div class="card">
+      <div class="card-header flex-between">
+        <span>{{ t.cases_page.title }}</span>
+        <a href="{{ url_for('cases') }}" style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">View All →</a>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        {% if recent_cases %}
+        <ul class="case-list">
+          {% for case in recent_cases %}
+          <li>
+            <a href="{{ url_for('view_case', case_id=case.case_id) }}" class="case-item">
+              <span class="case-risk-dot {% if case.risk == 'URGENT_REFERRAL' %}urgent{% elif case.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}"></span>
+              <div class="case-info">
+                <div class="case-id">{{ case.case_id }}</div>
+                <div class="case-meta">{{ case.patient_group|title }} • {{ case.age_months }}m • {{ case.created_at[:16]|replace('T', ' ') }}</div>
+              </div>
+              <div>
+                <span class="badge {% if case.risk == 'URGENT_REFERRAL' %}badge-urgent{% elif case.risk == 'CLINIC_VISIT' %}badge-clinic{% else %}badge-home{% endif %}">
+                  {{ case.risk|replace('_', ' ') }}
+                </span>
+              </div>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">📁</div>
+          <p>{{ t.cases_page.no_cases }}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

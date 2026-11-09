@@ -214,6 +214,19 @@ def api_sync_status():
     return jsonify({**status_info, **stats})
 
 
+@app.route('/api/sync-now', methods=['POST', 'GET'])
+def api_sync_now():
+    """Manual sync trigger endpoint."""
+    status_info = sync_worker.trigger_sync()
+    stats = get_stats()
+    return jsonify({
+        'success': True,
+        'message': 'Sync triggered successfully',
+        **status_info,
+        **stats
+    })
+
+
 @app.route('/export/csv')
 def export_csv():
     csv_data = export_cases_csv()

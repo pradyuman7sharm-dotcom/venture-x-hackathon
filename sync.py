@@ -69,6 +69,15 @@ class SyncWorker:
             self.last_check = datetime.utcnow().isoformat() + 'Z'
         return self.is_online
 
+    def trigger_sync(self):
+        """Manually trigger immediate connectivity check and case synchronization."""
+        online = self.check_connectivity()
+        if online:
+            self._sync_cases()
+            self._check_rule_updates()
+        self._update_pending_count()
+        return self.get_status()
+
     def _run_loop(self):
         """Main sync loop - runs every SYNC_INTERVAL seconds."""
         while self.running:

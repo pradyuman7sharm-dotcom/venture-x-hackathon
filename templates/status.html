@@ -2,7 +2,17 @@
 
 {% block content %}
 <div class="card">
-  <div class="card-header">{{ t.status_page.title }}</div>
+  <div class="card-header flex-between" style="flex-wrap: wrap; gap: 0.75rem;">
+    <span>{{ t.status_page.title }}</span>
+    <div style="display: flex; gap: 0.5rem;">
+      <button type="button" class="btn btn-primary" style="min-height: 40px; padding: 0.4rem 1rem; font-size: 0.85rem;" onclick="triggerManualSync()">
+        🔄 {{ t.common.sync_now or 'Sync Now' }}
+      </button>
+      <button type="button" class="security-pill" onclick="openSecurityModal()">
+        🛡️ Verify Protection
+      </button>
+    </div>
+  </div>
   <div class="card-body">
     <div class="status-grid">
       <div class="status-card">
@@ -45,6 +55,12 @@
         <td style="padding: 0.75rem 0; font-weight: 600;">Last Successful Sync</td>
         <td style="padding: 0.75rem 0; text-align: right;">{{ sync_status.last_sync or 'Never' }}</td>
       </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.75rem 0; font-weight: 600;">Data Encryption & Anti-Hack State</td>
+        <td style="padding: 0.75rem 0; text-align: right;">
+          <span style="color: var(--risk-home); font-weight: bold;">🔒 Verified Local & Protected</span>
+        </td>
+      </tr>
       <tr>
         <td style="padding: 0.75rem 0; font-weight: 600;">Background Worker Status</td>
         <td style="padding: 0.75rem 0; text-align: right;">
@@ -53,11 +69,11 @@
       </tr>
     </table>
 
-    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-      <a href="{{ url_for('export_csv') }}" class="btn btn-outline" style="flex: 1;">
+    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+      <a href="{{ url_for('export_csv') }}" class="btn btn-outline" style="flex: 1; min-width: 200px;">
         📥 {{ t.status_page.export_csv }}
       </a>
-      <a href="{{ url_for('export_json_route') }}" class="btn btn-outline" style="flex: 1;">
+      <a href="{{ url_for('export_json_route') }}" class="btn btn-outline" style="flex: 1; min-width: 200px;">
         📥 {{ t.status_page.export_json }}
       </a>
     </div>

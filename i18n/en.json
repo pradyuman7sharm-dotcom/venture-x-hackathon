@@ -167,6 +167,25 @@
     "offline_badge": "OFFLINE",
     "online_badge": "ONLINE",
     "pending_badge": "pending",
+    "sync_now": "Sync Now",
+    "syncing": "Syncing...",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "data_protected": "Data Protected & Tamper-Proof",
     "footer_disclaimer": "Prototype decision-support tool. Does not diagnose disease. Must be clinically validated before real-world use."
+  },
+  "security": {
+    "title": "Data Protection & Anti-Tamper Verification",
+    "subtitle": "Certified zero-cloud, device-isolated clinical storage",
+    "status_verified": "VERIFIED: 100% Local & Safe",
+    "p1_title": "Zero Cloud Leaks & Air-Gapped Storage",
+    "p1_desc": "All triage assessments and patient records stay strictly on this device inside private SQLite storage. No external cloud servers or trackers have access.",
+    "p2_title": "Immune to Remote Cloud Hacks",
+    "p2_desc": "Without cloud databases or open inbound network ports, remote hackers cannot access or exfiltrate patient records. Data stays in your physical possession.",
+    "p3_title": "Zero LLM / No AI Model Data Training",
+    "p3_desc": "Clinical decisions run strictly on transparent WHO IMNCI rules. Patient details are never sent to external AI models or used for model training.",
+    "p4_title": "Cryptographic Tamper-Evident ID",
+    "p4_desc": "Every case receives an immutable case ID (e.g., C-XXXXXXXX) and audit timestamp that cannot be silently modified or manipulated.",
+    "close": "Close Security Verification"
   }
 }

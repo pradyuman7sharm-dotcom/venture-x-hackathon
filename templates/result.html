@@ -18,73 +18,89 @@
   </div>
 </div>
 
-<div class="card" style="padding: 0; overflow: hidden;">
-  <div class="risk-banner {% if result.risk == 'URGENT_REFERRAL' %}urgent{% elif result.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}">
-    <div class="risk-icon">
-      {% if result.risk == 'URGENT_REFERRAL' %}⚠️{% elif result.risk == 'CLINIC_VISIT' %}⚡{% else %}✅{% endif %}
+<div class="result-layout">
+  <!-- Left Side: Risk Banner & Patient Guidance -->
+  <div>
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <div class="risk-banner {% if result.risk == 'URGENT_REFERRAL' %}urgent{% elif result.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}">
+        <div class="risk-icon">
+          {% if result.risk == 'URGENT_REFERRAL' %}⚠️{% elif result.risk == 'CLINIC_VISIT' %}⚡{% else %}✅{% endif %}
+        </div>
+        <h2>{{ t.risk[result.risk] if result.risk in t.risk else result.risk }}</h2>
+        <p>{{ t.risk_description[result.risk] if result.risk in t.risk_description else '' }}</p>
+      </div>
+
+      <div class="card-body">
+        <div class="flex-between mb-2">
+          <div>
+            <strong>{{ t.cases_page.case_id }}:</strong> <code>{{ case_id }}</code>
+          </div>
+          <div>
+            <span class="badge badge-sync">{{ t.cases_page.saved_locally }}</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <strong>{{ t.cases_page.patient }}:</strong>
+          {{ t.patient_groups[patient_group] if patient_group in t.patient_groups else patient_group|title }}
+          • {{ age_months }} {{ t.step1.age_months }}
+          {% if gender %}• {{ gender|title }}{% endif %}
+        </div>
+
+        <div class="mb-3">
+          <button type="button" class="btn btn-outline btn-block" onclick="toggleExplanation()">
+            🗣️ {{ t.result.explain_button }}
+          </button>
+
+          <div id="explanation-box" class="explanation-box" style="display: block; margin-top: 1rem;">
+            <h4 style="margin-top: 0;">📢 Spoken Guidance for Family:</h4>
+            <p style="margin: 0;">{{ result.explanation }}</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <h2>{{ t.risk[result.risk] if result.risk in t.risk else result.risk }}</h2>
-    <p>{{ t.risk_description[result.risk] if result.risk in t.risk_description else '' }}</p>
   </div>
 
-  <div class="card-body">
-    <div class="flex-between mb-2">
-      <div>
-        <strong>{{ t.cases_page.case_id }}:</strong> <code>{{ case_id }}</code>
+  <!-- Right Side: Reasons, Protocols & Action Buttons -->
+  <div>
+    <div class="card">
+      <div class="card-header">{{ t.result.reasons_title }}</div>
+      <div class="card-body">
+        <ul class="reasons-list">
+          {% for reason in result.reasons %}
+          <li>{{ reason }}</li>
+          {% endfor %}
+        </ul>
+
+        {% if result.protocol_refs %}
+        <div class="mt-3">
+          <h4>{{ t.result.protocol_title }}</h4>
+          <ul class="protocol-list">
+            {% for ref in result.protocol_refs %}
+            <li>{{ ref }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <div class="mt-4 no-print" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="{{ url_for('pdf_card', case_id=case_id) }}" class="btn btn-primary btn-block">
+            📄 Download PDF Referral Card
+          </a>
+          <a href="{{ url_for('print_card', case_id=case_id) }}" class="btn btn-outline btn-block">
+            🖨️ {{ t.result.print_button }}
+          </a>
+          <a href="{{ url_for('new_case') }}" class="btn btn-success btn-block">
+            ➕ {{ t.result.new_case_button }}
+          </a>
+        </div>
+
+        <div class="mt-3 text-center no-print">
+          <button type="button" class="security-pill" onclick="openSecurityModal()" style="font-size: 0.75rem;">
+            🛡️ Case Record Encrypted & Protected Offline
+          </button>
+        </div>
       </div>
-      <div>
-        <span class="badge badge-sync">{{ t.cases_page.saved_locally }}</span>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <strong>{{ t.cases_page.patient }}:</strong>
-      {{ t.patient_groups[patient_group] if patient_group in t.patient_groups else patient_group|title }}
-      • {{ age_months }} {{ t.step1.age_months }}
-      {% if gender %}• {{ gender|title }}{% endif %}
-    </div>
-
-    <div class="mb-3">
-      <h3>{{ t.result.reasons_title }}</h3>
-      <ul class="reasons-list">
-        {% for reason in result.reasons %}
-        <li>{{ reason }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    {% if result.protocol_refs %}
-    <div class="mb-3">
-      <h4>{{ t.result.protocol_title }}</h4>
-      <ul class="protocol-list">
-        {% for ref in result.protocol_refs %}
-        <li>{{ ref }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-
-    <div class="mb-3 no-print">
-      <button type="button" class="btn btn-outline btn-block" onclick="toggleExplanation()">
-        🗣️ {{ t.result.explain_button }}
-      </button>
-
-      <div id="explanation-box" class="explanation-box">
-        <h4>📢 {{ t.result.explain_button }}</h4>
-        <p>{{ result.explanation }}</p>
-      </div>
-    </div>
-
-    <div class="no-print" style="display: flex; flex-direction: column; gap: 0.75rem;">
-      <a href="{{ url_for('pdf_card', case_id=case_id) }}" class="btn btn-primary btn-block">
-        📄 Download PDF Referral Card
-      </a>
-      <a href="{{ url_for('print_card', case_id=case_id) }}" class="btn btn-outline btn-block">
-        🖨️ {{ t.result.print_button }}
-      </a>
-      <a href="{{ url_for('new_case') }}" class="btn btn-success btn-block">
-        ➕ {{ t.result.new_case_button }}
-      </a>
     </div>
   </div>
 </div>
