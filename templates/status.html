@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">{{ t.status_page.title }}</div>
+  <div class="card-body">
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-value">
+          {% if sync_status.is_online %}
+          <span style="color: var(--risk-home);">ONLINE</span>
+          {% else %}
+          <span style="color: var(--risk-urgent);">OFFLINE</span>
+          {% endif %}
+        </div>
+        <div class="status-label">{{ t.status_page.connectivity }}</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-value" style="color: var(--risk-clinic);">{{ stats.pending_count }}</div>
+        <div class="status-label">{{ t.status_page.pending_sync }}</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-value">{{ stats.total_cases }}</div>
+        <div class="status-label">{{ t.status_page.total_cases }}</div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-value">{{ stats.synced_count }}</div>
+        <div class="status-label">{{ t.status_page.synced_cases }}</div>
+      </div>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.75rem 0; font-weight: 600;">{{ t.status_page.db_size }}</td>
+        <td style="padding: 0.75rem 0; text-align: right;">{{ stats.db_size_human }}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.75rem 0; font-weight: 600;">{{ t.status_page.last_check }}</td>
+        <td style="padding: 0.75rem 0; text-align: right;">{{ sync_status.last_check or 'Never' }}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.75rem 0; font-weight: 600;">Last Successful Sync</td>
+        <td style="padding: 0.75rem 0; text-align: right;">{{ sync_status.last_sync or 'Never' }}</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem 0; font-weight: 600;">Background Worker Status</td>
+        <td style="padding: 0.75rem 0; text-align: right;">
+          {% if sync_status.running %}<span style="color: var(--risk-home); font-weight: bold;">Active</span>{% else %}Inactive{% endif %}
+        </td>
+      </tr>
+    </table>
+
+    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+      <a href="{{ url_for('export_csv') }}" class="btn btn-outline" style="flex: 1;">
+        📥 {{ t.status_page.export_csv }}
+      </a>
+      <a href="{{ url_for('export_json_route') }}" class="btn btn-outline" style="flex: 1;">
+        📥 {{ t.status_page.export_json }}
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,257 @@
+{
+  "convulsions": {
+    "en": ["convulsions", "convulsion", "fits", "fit", "seizure", "seizures", "shaking", "jerking", "spasm", "spasms"],
+    "hi": ["akdan", "jhatkay", "mirgi", "dora", "jhatkaa"],
+    "pa": ["akdan", "jhatkay", "mirgi", "dora", "jhatkaa"]
+  },
+  "fever": {
+    "en": ["fever", "hot", "temperature", "high temperature", "burning", "feverish", "warm body"],
+    "hi": ["bukhar", "bukhaar", "taap", "garmi", "badan garam"],
+    "pa": ["bukhar", "taap", "garmi", "badan garam", "tatta"]
+  },
+  "fast_breathing": {
+    "en": ["fast breathing", "rapid breathing", "breathless", "breathing fast", "short of breath", "difficult breathing"],
+    "hi": ["tez saans", "saans fulna", "saans tej", "saans me taklif"],
+    "pa": ["tez saah", "saah fulna", "saah tej", "saah vich takleef"]
+  },
+  "chest_indrawing": {
+    "en": ["chest indrawing", "chest in-drawing", "ribs pulling in", "chest sinking", "chest retraction"],
+    "hi": ["chhaati dhansna", "seena andar jaana", "pasli dhansna"],
+    "pa": ["chhaati dhusna", "seena andar jaana", "pasli dhusna"]
+  },
+  "unable_to_drink": {
+    "en": ["unable to drink", "cannot drink", "not drinking", "refuses to drink", "unable to feed", "cannot feed"],
+    "hi": ["peene me asmarth", "pee nahi sakta", "pee nahi sakti", "doodh nahi pee raha"],
+    "pa": ["pee nahi sakda", "pee nahi sakdi", "doodh nahi peenda"]
+  },
+  "not_feeding": {
+    "en": ["not feeding", "stopped feeding", "refuses feed", "not breastfeeding", "not sucking", "poor feeding"],
+    "hi": ["doodh nahi pee raha", "doodh nahi peeta", "stanpan nahi", "chhoosta nahi"],
+    "pa": ["doodh nahi peenda", "doodh nahi peendi", "maa da doodh nahi peenda"]
+  },
+  "vomiting_everything": {
+    "en": ["vomiting everything", "vomits everything", "cannot keep food down", "vomiting all", "severe vomiting"],
+    "hi": ["sab ulti kar deta", "baar baar ulti", "ulti ho rahi", "kuch nahi rakh pata"],
+    "pa": ["sab ulti kar denda", "baar baar ulti", "ulti ho rahi", "kuch nahi rakh sakda"]
+  },
+  "lethargy": {
+    "en": ["lethargy", "lethargic", "very sleepy", "drowsy", "difficult to wake", "unusually sleepy", "sluggish"],
+    "hi": ["susti", "bahut neend", "sust", "uthta nahi", "jagta nahi"],
+    "pa": ["susti", "bahut neend", "sust", "uthda nahi", "jagda nahi"]
+  },
+  "unconscious": {
+    "en": ["unconscious", "unresponsive", "not responding", "passed out", "fainted", "coma"],
+    "hi": ["behosh", "hosh nahi", "behoshi", "jawab nahi de raha"],
+    "pa": ["behosh", "hosh nahi", "behoshi", "jawab nahi denda"]
+  },
+  "diarrhoea": {
+    "en": ["diarrhoea", "diarrhea", "loose stools", "watery stools", "loose motions", "running stomach", "frequent stools"],
+    "hi": ["dast", "loose motion", "patla dast", "paani jaisa dast", "baar baar dast"],
+    "pa": ["dast", "loose motion", "patla dast", "paani warga dast", "baar baar dast"]
+  },
+  "sunken_eyes": {
+    "en": ["sunken eyes", "eyes sunken", "hollow eyes", "eyes gone in"],
+    "hi": ["aankhein dhasi", "aankhein andar", "aankhein dhans gayi"],
+    "pa": ["akhan dhasian", "akhan andar", "akhan dhas gaiyan"]
+  },
+  "skin_pinch_slow": {
+    "en": ["skin pinch slow", "skin goes back slowly", "skin turgor poor", "dehydrated skin", "tenting skin"],
+    "hi": ["chamdi dhili", "chamdi wapas nahi aati", "chamdi dhili hai"],
+    "pa": ["chamdi dhili", "chamdi wapas nahi aundi", "chamdi dhili hai"]
+  },
+  "restless": {
+    "en": ["restless", "irritable", "agitated", "cranky", "fussy", "cannot stay still"],
+    "hi": ["bechaini", "chidhchidha", "pareshan", "chainchaini"],
+    "pa": ["bechaini", "chirhchirha", "pareshan", "chainchaini"]
+  },
+  "irritable": {
+    "en": ["irritable", "cranky", "fussy", "crying a lot", "always crying"],
+    "hi": ["chidhchidha", "baar baar rona", "bahut rota hai"],
+    "pa": ["chirhchirha", "baar baar rona", "bahut ronda hai"]
+  },
+  "drinks_eagerly": {
+    "en": ["drinks eagerly", "very thirsty", "wants to drink", "thirsty", "asks for water"],
+    "hi": ["bahut pyaas", "pyaas lagi", "paani maangta hai", "baar baar paani"],
+    "pa": ["bahut pyaas", "pyaas laggi", "paani mangda hai", "baar baar paani"]
+  },
+  "visible_wasting": {
+    "en": ["visible wasting", "very thin", "severe wasting", "skin and bones", "malnourished", "emaciated"],
+    "hi": ["bahut patla", "sukha hua", "haddi haddi", "kamzor", "kuposhan"],
+    "pa": ["bahut patla", "sukha hoya", "haddi haddi", "kamzor", "kuposhan"]
+  },
+  "oedema_both_feet": {
+    "en": ["swelling both feet", "oedema both feet", "puffy feet", "feet swollen", "edema feet", "bilateral edema"],
+    "hi": ["dono pair sujan", "pair suje", "dono pair mein sooj", "pair phule"],
+    "pa": ["dono pair sujan", "pair suje", "dono pair vich sooj", "pair phulle"]
+  },
+  "stiff_neck": {
+    "en": ["stiff neck", "neck stiffness", "cannot bend neck", "neck rigid", "neck pain stiff"],
+    "hi": ["gardan akadna", "gardan mein akdan", "gardan nahi hil rahi"],
+    "pa": ["gardan akadna", "gardan vich akdan", "gardan nahi hildi"]
+  },
+  "bulging_fontanelle": {
+    "en": ["bulging fontanelle", "soft spot bulging", "fontanelle swollen", "head soft spot swollen"],
+    "hi": ["tallu ubhra", "sir ka naram hissa ubhra", "tallu phula"],
+    "pa": ["tallu ubhria", "sir da naram hissa ubhria", "tallu phullia"]
+  },
+  "rash": {
+    "en": ["rash", "skin rash", "red spots", "spots on body", "rashes"],
+    "hi": ["daane", "lal daane", "chakte", "dane nikle"],
+    "pa": ["daane", "lal daane", "chakte", "dane nikle"]
+  },
+  "mouth_ulcers": {
+    "en": ["mouth ulcers", "mouth sores", "sores in mouth", "ulcers mouth", "oral sores"],
+    "hi": ["munh ke chhale", "munh mein ghav", "chhale"],
+    "pa": ["munh de chhale", "munh vich ghav", "chhale"]
+  },
+  "pus_from_eyes": {
+    "en": ["pus from eyes", "eye discharge", "eye pus", "eyes discharging", "sticky eyes"],
+    "hi": ["aankhon se pus", "aankhon se mawad", "aankhein chipak rahi"],
+    "pa": ["akhan cho pus", "akhan cho mawad", "akhan chipak rahian"]
+  },
+  "clouding_cornea": {
+    "en": ["clouding cornea", "cornea clouding", "eye cloudy", "white spot eye", "corneal opacity"],
+    "hi": ["aankh mein safed dhabb", "aankh dhundli", "cornea dhundla"],
+    "pa": ["akhan vich safed dhabb", "akhan dhundli", "cornea dhundla"]
+  },
+  "stridor": {
+    "en": ["stridor", "noisy breathing", "wheezing", "whistling breath", "harsh breathing sound"],
+    "hi": ["saans mein awaaz", "ghargharahat", "seeti jaisi awaaz"],
+    "pa": ["saah vich awaaz", "ghargharahat", "seeti wargi awaaz"]
+  },
+  "vaginal_bleeding": {
+    "en": ["vaginal bleeding", "bleeding", "blood loss", "heavy bleeding", "hemorrhage"],
+    "hi": ["yoni se khoon", "khoon bahna", "bleeding", "bahut khoon"],
+    "pa": ["yoni cho khoon", "khoon behna", "bleeding", "bahut khoon"]
+  },
+  "severe_headache": {
+    "en": ["severe headache", "very bad headache", "intense headache", "splitting headache", "worst headache"],
+    "hi": ["bahut tez sir dard", "sir mein bahut dard", "sir phat raha"],
+    "pa": ["bahut tez sir dard", "sir vich bahut dard", "sir phat riha"]
+  },
+  "blurred_vision": {
+    "en": ["blurred vision", "cannot see clearly", "vision blurry", "eyes blurry", "dim vision"],
+    "hi": ["dhundla dikhna", "saaf nahi dikhta", "nazar kamzor"],
+    "pa": ["dhundla dikhna", "saaf nahi dikhda", "nazar kamzor"]
+  },
+  "high_fever_pregnancy": {
+    "en": ["high fever", "very high temperature", "burning fever", "fever in pregnancy"],
+    "hi": ["bahut tez bukhar", "tez bukhar", "bukhar bahut hai"],
+    "pa": ["bahut tez bukhar", "tez bukhar", "bukhar bahut hai"]
+  },
+  "reduced_fetal_movement": {
+    "en": ["reduced fetal movement", "baby not moving", "less baby movement", "no kicking", "baby stopped moving"],
+    "hi": ["baccha nahi hil raha", "bacche ki harkat kam", "pet mein harkat nahi", "laat nahi maar raha"],
+    "pa": ["baccha nahi hildaa", "bacche di harkat ghat", "pet vich harkat nahi", "laat nahi maarda"]
+  },
+  "water_break_early": {
+    "en": ["water broke", "water breaking", "leaking water", "amniotic fluid leak", "waters broken early"],
+    "hi": ["paani toot gaya", "paani aa raha", "paani gir raha", "jhilli phat gayi"],
+    "pa": ["paani tutt gaya", "paani aa riha", "paani gir riha", "jhilli phatt gayi"]
+  },
+  "severe_abdominal_pain": {
+    "en": ["severe abdominal pain", "severe stomach pain", "very bad belly pain", "intense abdominal pain", "sharp stomach pain"],
+    "hi": ["pet mein bahut dard", "pet bahut dard ho raha", "tez pet dard"],
+    "pa": ["pet vich bahut dard", "pet bahut dard ho riha", "tez pet dard"]
+  },
+  "swelling_face_hands": {
+    "en": ["swelling face", "face swollen", "hands swollen", "puffy face", "swollen hands and face"],
+    "hi": ["chehra sujna", "haath sujay", "chehra aur haath suje", "munh pe sooj"],
+    "pa": ["chehra sujna", "haath suje", "chehra te haath suje", "munh te sooj"]
+  },
+  "mild_headache": {
+    "en": ["mild headache", "slight headache", "little headache", "head hurts a bit"],
+    "hi": ["halka sir dard", "thoda sir dard", "sir mein halka dard"],
+    "pa": ["halka sir dard", "thoda sir dard", "sir vich halka dard"]
+  },
+  "swelling_feet": {
+    "en": ["swelling feet", "feet swollen", "ankle swelling", "puffy ankles", "swollen feet only"],
+    "hi": ["pair suje", "pair mein sooj", "edhiyan suji"],
+    "pa": ["pair suje", "pair vich sooj", "eddiyan sujian"]
+  },
+  "mild_fever_pregnancy": {
+    "en": ["mild fever", "slight fever", "low grade fever", "little fever"],
+    "hi": ["halka bukhar", "thoda bukhar", "mamuli bukhar"],
+    "pa": ["halka bukhar", "thoda bukhar", "mamuli bukhar"]
+  },
+  "burning_urination": {
+    "en": ["burning urination", "painful urination", "burning when urinating", "urine burns", "UTI"],
+    "hi": ["peshaab mein jalan", "peshaab karte dard", "jalan"],
+    "pa": ["peshaab vich jalan", "peshaab karde dard", "jalan"]
+  },
+  "chest_pain": {
+    "en": ["chest pain", "pain in chest", "heart pain", "tightness chest", "pressure chest"],
+    "hi": ["seene mein dard", "chhaati mein dard", "dil mein dard"],
+    "pa": ["seene vich dard", "chhaati vich dard", "dil vich dard"]
+  },
+  "difficulty_breathing_severe": {
+    "en": ["severe difficulty breathing", "cannot breathe", "gasping", "choking", "extreme breathlessness"],
+    "hi": ["saans nahi aa rahi", "saans lene mein bahut taklif", "dam ghut raha"],
+    "pa": ["saah nahi aa riha", "saah lain vich bahut takleef", "dam ghutt riha"]
+  },
+  "severe_bleeding": {
+    "en": ["severe bleeding", "heavy bleeding", "profuse bleeding", "blood loss severe", "hemorrhage"],
+    "hi": ["bahut zyada khoon", "khoon bahut bah raha", "bahut bleeding"],
+    "pa": ["bahut zyada khoon", "khoon bahut veh riha", "bahut bleeding"]
+  },
+  "high_fever_prolonged": {
+    "en": ["high fever prolonged", "fever more than 3 days", "fever lasting days", "persistent high fever"],
+    "hi": ["bahut din se bukhar", "teen din se bukhar", "bukhar nahi ja raha"],
+    "pa": ["bahut din to bukhar", "tinn din to bukhar", "bukhar nahi ja riha"]
+  },
+  "persistent_cough": {
+    "en": ["persistent cough", "chronic cough", "cough not going", "coughing for weeks", "long cough"],
+    "hi": ["lamba khansi", "khansi nahi ja rahi", "bahut din se khansi"],
+    "pa": ["lambi khansi", "khansi nahi ja rahi", "bahut din to khansi"]
+  },
+  "mild_bleeding": {
+    "en": ["mild bleeding", "slight bleeding", "small amount blood", "little bleeding", "spotting"],
+    "hi": ["halka khoon", "thoda khoon", "kam bleeding"],
+    "pa": ["halka khoon", "thoda khoon", "ghat bleeding"]
+  },
+  "skin_rash": {
+    "en": ["skin rash", "rash on body", "red patches", "skin spots", "itchy rash"],
+    "hi": ["chamdi pe daane", "lal chamdi", "kharish", "daane"],
+    "pa": ["chamdi te daane", "lal chamdi", "kharish", "daane"]
+  },
+  "umbilicus_redness": {
+    "en": ["umbilicus redness", "navel red", "belly button red", "cord infection", "red around navel"],
+    "hi": ["naabhi lal", "naabhi mein sooj", "naabhi se pus"],
+    "pa": ["naabhi lal", "naabhi vich sooj", "naabhi cho pus"]
+  },
+  "skin_pustules": {
+    "en": ["skin pustules", "boils", "pus filled bumps", "skin boils", "infected spots"],
+    "hi": ["pheede", "phunsi", "pus wale daane", "fode"],
+    "pa": ["pheede", "phunsi", "pus wale daane", "phode"]
+  },
+  "yellow_skin_newborn": {
+    "en": ["yellow skin", "jaundice", "yellowish skin", "yellow eyes", "skin turning yellow"],
+    "hi": ["peeli chamdi", "peeliya", "piliya", "aankh peeli"],
+    "pa": ["peeli chamdi", "peelia", "pilia", "akhan peelian"]
+  },
+  "low_birth_weight": {
+    "en": ["low birth weight", "underweight baby", "small baby", "premature", "preterm"],
+    "hi": ["kam wajan", "chhota baccha", "samay se pehle", "kamzor baccha"],
+    "pa": ["ghat vazan", "chhota baccha", "samay to pehlan", "kamzor baccha"]
+  },
+  "hypothermia": {
+    "en": ["hypothermia", "body cold", "cold to touch", "low body temperature", "baby cold"],
+    "hi": ["badan thanda", "thanda padh gaya", "body thanda"],
+    "pa": ["badan thanda", "thanda peh gaya", "body thanda"]
+  },
+  "bleeding_newborn": {
+    "en": ["bleeding newborn", "baby bleeding", "blood from cord", "newborn bleeding"],
+    "hi": ["bacche ko khoon", "naabhi se khoon", "khoon nikal raha"],
+    "pa": ["bacche nu khoon", "naabhi cho khoon", "khoon nikal riha"]
+  },
+  "fast_breathing_newborn": {
+    "en": ["fast breathing newborn", "rapid breathing baby", "baby breathing fast", "newborn breathing fast"],
+    "hi": ["bacche ki saans tez", "navajaath ki saans tez", "tez saans bacche"],
+    "pa": ["bacche di saah tez", "navjaat di saah tez", "tez saah bacche"]
+  },
+  "severe_chest_indrawing_newborn": {
+    "en": ["severe chest indrawing newborn", "baby chest indrawing", "newborn chest sinking"],
+    "hi": ["bacche ki chhaati dhansna", "navajaath ki chhaati andar"],
+    "pa": ["bacche di chhaati dhusna", "navjaat di chhaati andar"]
+  }
+}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="step-indicator">
+  <div class="step done">
+    <span class="step-num">✓</span>
+    <span>{{ t.step1.title }}</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step active">
+    <span class="step-num">2</span>
+    <span>{{ t.step2.title }}</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <span class="step-num">3</span>
+    <span>{{ t.result.title }}</span>
+  </div>
+</div>
+
+<div class="card mb-2">
+  <div class="card-body" style="padding: 0.75rem 1.25rem;">
+    <strong>{{ t.cases_page.patient }}:</strong>
+    {{ t.patient_groups[patient_group] if patient_group in t.patient_groups else patient_group }}
+    • {{ age_months }} {{ t.step1.age_months }}
+    {% if gender %}• {{ gender|title }}{% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">{{ t.step2.title }}</div>
+  <div class="card-body">
+    <form action="{{ url_for('check_risk') }}" method="POST">
+      <input type="hidden" name="patient_group" value="{{ patient_group }}">
+      <input type="hidden" name="age_months" value="{{ age_months }}">
+      <input type="hidden" name="gender" value="{{ gender }}">
+
+      <!-- Voice or Text Input -->
+      <div class="text-center mb-2">
+        <button type="button" id="voice-btn" class="voice-btn" title="{{ t.step2.voice_prompt }}">
+          🎤
+        </button>
+        <p style="font-size: 0.85rem; color: var(--text-light);">{{ t.step2.voice_prompt }}</p>
+      </div>
+
+      <div class="form-group">
+        <textarea id="symptom_text" name="symptom_text" class="form-textarea" placeholder="{{ t.step2.text_placeholder }}"></textarea>
+      </div>
+
+      <p class="form-label mt-3">{{ t.step2.or_select }}</p>
+
+      <div class="symptom-grid">
+        {% for sym in available_symptoms %}
+        <div class="symptom-checkbox">
+          <input type="checkbox" name="symptoms" value="{{ sym }}" style="display: none;">
+          <span class="sym-check"></span>
+          <span class="sym-label">{{ t.symptoms[sym] if sym in t.symptoms else sym|replace('_', ' ')|title }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">
+          {{ t.step2.check_risk }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

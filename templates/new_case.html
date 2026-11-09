@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="step-indicator">
+  <div class="step active">
+    <span class="step-num">1</span>
+    <span>{{ t.step1.title }}</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <span class="step-num">2</span>
+    <span>{{ t.step2.title }}</span>
+  </div>
+  <div class="step-line"></div>
+  <div class="step">
+    <span class="step-num">3</span>
+    <span>{{ t.result.title }}</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">{{ t.step1.title }}</div>
+  <div class="card-body">
+    <form action="{{ url_for('symptoms') }}" method="POST" id="step1-form">
+      <input type="hidden" name="patient_group" id="patient_group" value="child">
+
+      <div class="patient-group-grid">
+        <div class="patient-group-card selected" data-group="child" onclick="selectGroup('child')">
+          <span class="pg-icon">👶</span>
+          <span class="pg-label">{{ t.patient_groups.child }}</span>
+        </div>
+        <div class="patient-group-card" data-group="newborn" onclick="selectGroup('newborn')">
+          <span class="pg-icon">🍼</span>
+          <span class="pg-label">{{ t.patient_groups.newborn }}</span>
+        </div>
+        <div class="patient-group-card" data-group="pregnant" onclick="selectGroup('pregnant')">
+          <span class="pg-icon">🤰</span>
+          <span class="pg-label">{{ t.patient_groups.pregnant }}</span>
+        </div>
+        <div class="patient-group-card" data-group="adult" onclick="selectGroup('adult')">
+          <span class="pg-icon">🧑</span>
+          <span class="pg-label">{{ t.patient_groups.adult }}</span>
+        </div>
+      </div>
+
+      <div class="form-row mt-2">
+        <div class="form-group" style="flex: 2;">
+          <label class="form-label" for="age">{{ t.step1.age_label }}</label>
+          <input type="number" id="age" name="age" class="form-input" min="0" max="120" value="12" required>
+        </div>
+        <div class="form-group" style="flex: 1.5;">
+          <label class="form-label">&nbsp;</label>
+          <select name="age_unit" id="age_unit" class="form-select">
+            <option value="months">{{ t.step1.age_months }}</option>
+            <option value="years">{{ t.step1.age_years }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" id="gender-group">
+        <label class="form-label" for="gender">{{ t.step1.gender_label }}</label>
+        <select name="gender" id="gender" class="form-select">
+          <option value="female">{{ t.step1.female }}</option>
+          <option value="male">{{ t.step1.male }}</option>
+          <option value="other">{{ t.step1.other }}</option>
+        </select>
+      </div>
+
+      <div class="mt-3">
+        <button type="submit" class="btn btn-primary btn-lg">
+          {{ t.step1.next }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function selectGroup(group) {
+  document.getElementById('patient_group').value = group;
+  document.querySelectorAll('.patient-group-card').forEach(function(card) {
+    if (card.dataset.group === group) {
+      card.classList.add('selected');
+    } else {
+      card.classList.remove('selected');
+    }
+  });
+
+  const ageInput = document.getElementById('age');
+  const ageUnit = document.getElementById('age_unit');
+  const genderGroup = document.getElementById('gender-group');
+  const genderSelect = document.getElementById('gender');
+
+  if (group === 'newborn') {
+    ageInput.value = 1;
+    ageInput.max = 2;
+    ageUnit.value = 'months';
+    genderGroup.style.display = 'block';
+  } else if (group === 'child') {
+    ageInput.value = 12;
+    ageInput.max = 60;
+    ageUnit.value = 'months';
+    genderGroup.style.display = 'block';
+  } else if (group === 'pregnant') {
+    ageInput.value = 24;
+    ageInput.max = 50;
+    ageUnit.value = 'years';
+    genderSelect.value = 'female';
+    genderGroup.style.display = 'none';
+  } else {
+    ageInput.value = 35;
+    ageInput.max = 120;
+    ageUnit.value = 'years';
+    genderGroup.style.display = 'block';
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,250 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2024-01-15",
+  "sources": [
+    "WHO IMNCI Chart Booklet 2014",
+    "WHO Pregnancy Risk Screening Guidelines",
+    "ASHA Training Modules 6 & 7 (MoHFW India)",
+    "IDSP Guidelines",
+    "NFHS-5 Health Indicators"
+  ],
+  "rules": [
+    {
+      "id": "GDS-001",
+      "patient_groups": ["child", "newborn"],
+      "name": "General Danger Signs",
+      "symptoms": ["convulsions", "unable_to_drink", "vomiting_everything", "lethargy", "unconscious"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - General Danger Signs, Chart Booklet Module 1",
+      "explanation_key": "general_danger_signs"
+    },
+    {
+      "id": "ARI-001",
+      "patient_groups": ["child"],
+      "name": "Severe Pneumonia or Very Severe Disease",
+      "symptoms": ["chest_indrawing", "stridor"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Cough or Difficult Breathing, Chart Booklet Module 2",
+      "explanation_key": "severe_pneumonia"
+    },
+    {
+      "id": "ARI-002",
+      "patient_groups": ["child"],
+      "name": "Pneumonia",
+      "symptoms": ["fast_breathing"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Cough or Difficult Breathing, Chart Booklet Module 2",
+      "explanation_key": "pneumonia"
+    },
+    {
+      "id": "DIA-001",
+      "patient_groups": ["child"],
+      "name": "Severe Dehydration",
+      "symptoms": ["diarrhoea", "sunken_eyes", "skin_pinch_slow", "unable_to_drink"],
+      "match": "all_of",
+      "match_required": ["diarrhoea"],
+      "match_additional_any": ["sunken_eyes", "skin_pinch_slow", "unable_to_drink"],
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Diarrhoea, Chart Booklet Module 3",
+      "explanation_key": "severe_dehydration"
+    },
+    {
+      "id": "DIA-002",
+      "patient_groups": ["child"],
+      "name": "Some Dehydration",
+      "symptoms": ["diarrhoea", "restless", "irritable", "drinks_eagerly"],
+      "match": "all_of",
+      "match_required": ["diarrhoea"],
+      "match_additional_any": ["restless", "irritable", "drinks_eagerly"],
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Diarrhoea, Chart Booklet Module 3",
+      "explanation_key": "some_dehydration"
+    },
+    {
+      "id": "MAL-001",
+      "patient_groups": ["child"],
+      "name": "Severe Malnutrition",
+      "symptoms": ["visible_wasting", "oedema_both_feet"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Malnutrition, Chart Booklet Module 5",
+      "explanation_key": "severe_malnutrition"
+    },
+    {
+      "id": "FEV-001",
+      "patient_groups": ["child"],
+      "name": "Very Severe Febrile Disease",
+      "symptoms": ["fever", "stiff_neck"],
+      "match": "all",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Fever, Chart Booklet Module 4",
+      "explanation_key": "severe_fever"
+    },
+    {
+      "id": "FEV-002",
+      "patient_groups": ["child"],
+      "name": "Very Severe Febrile Disease (Fontanelle)",
+      "symptoms": ["fever", "bulging_fontanelle"],
+      "match": "all",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Fever, Chart Booklet Module 4",
+      "explanation_key": "severe_fever",
+      "age_condition": {"min_months": 0, "max_months": 18}
+    },
+    {
+      "id": "FEV-003",
+      "patient_groups": ["child"],
+      "name": "Fever",
+      "symptoms": ["fever"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Fever, Chart Booklet Module 4",
+      "explanation_key": "fever_only"
+    },
+    {
+      "id": "MEA-001",
+      "patient_groups": ["child"],
+      "name": "Severe Complicated Measles",
+      "symptoms": ["rash", "clouding_cornea"],
+      "match": "all",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Measles, Chart Booklet Module 4",
+      "explanation_key": "measles_complications"
+    },
+    {
+      "id": "MEA-002",
+      "patient_groups": ["child"],
+      "name": "Measles with Complications",
+      "symptoms": ["rash", "mouth_ulcers", "pus_from_eyes"],
+      "match": "all_of",
+      "match_required": ["rash"],
+      "match_additional_any": ["mouth_ulcers", "pus_from_eyes"],
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Measles, Chart Booklet Module 4",
+      "explanation_key": "measles_complications"
+    },
+    {
+      "id": "NB-001",
+      "patient_groups": ["newborn"],
+      "name": "Very Severe Disease (Newborn)",
+      "symptoms": ["not_feeding", "fast_breathing_newborn", "severe_chest_indrawing_newborn", "fever_newborn", "hypothermia", "bleeding_newborn"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO IMNCI - Young Infant (0-2 months), Chart Booklet Module 6",
+      "explanation_key": "very_severe_disease_newborn"
+    },
+    {
+      "id": "NB-002",
+      "patient_groups": ["newborn"],
+      "name": "Local Bacterial Infection (Newborn)",
+      "symptoms": ["umbilicus_redness", "skin_pustules"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Young Infant (0-2 months), Chart Booklet Module 6",
+      "explanation_key": "local_infection_newborn"
+    },
+    {
+      "id": "NB-003",
+      "patient_groups": ["newborn"],
+      "name": "Jaundice (Newborn)",
+      "symptoms": ["yellow_skin_newborn"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Young Infant (0-2 months), Chart Booklet Module 6",
+      "explanation_key": "jaundice_newborn"
+    },
+    {
+      "id": "NB-004",
+      "patient_groups": ["newborn"],
+      "name": "Low Birth Weight",
+      "symptoms": ["low_birth_weight"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO IMNCI - Young Infant (0-2 months), Chart Booklet Module 6",
+      "explanation_key": "low_weight_newborn"
+    },
+    {
+      "id": "PG-001",
+      "patient_groups": ["pregnant"],
+      "name": "Pregnancy Danger Signs",
+      "symptoms": ["vaginal_bleeding", "convulsions", "severe_headache", "blurred_vision", "high_fever_pregnancy", "reduced_fetal_movement", "water_break_early", "severe_abdominal_pain", "swelling_face_hands"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "WHO Pregnancy Risk Screening / ASHA Module 7 - Danger Signs in Pregnancy",
+      "explanation_key": "pregnancy_danger"
+    },
+    {
+      "id": "PG-002",
+      "patient_groups": ["pregnant"],
+      "name": "Pregnancy Warning Signs",
+      "symptoms": ["mild_headache", "swelling_feet", "mild_fever_pregnancy", "burning_urination"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "WHO Pregnancy Risk Screening / ASHA Module 7 - Warning Signs in Pregnancy",
+      "explanation_key": "pregnancy_warning"
+    },
+    {
+      "id": "AD-001",
+      "patient_groups": ["adult"],
+      "name": "Adult Danger Signs",
+      "symptoms": ["chest_pain", "difficulty_breathing_severe", "unconscious", "severe_bleeding", "high_fever_prolonged", "convulsions"],
+      "match": "any",
+      "risk": "URGENT_REFERRAL",
+      "protocol_ref": "IDSP Community-Based Surveillance / ASHA Module 6 - Adult Emergency Signs",
+      "explanation_key": "adult_danger"
+    },
+    {
+      "id": "AD-002",
+      "patient_groups": ["adult"],
+      "name": "Adult Warning Signs",
+      "symptoms": ["fever", "persistent_cough", "mild_bleeding", "diarrhoea", "skin_rash"],
+      "match": "any",
+      "risk": "CLINIC_VISIT",
+      "protocol_ref": "IDSP Community-Based Surveillance / ASHA Module 6 - Adult Health",
+      "explanation_key": "adult_warning"
+    },
+    {
+      "id": "HC-CHILD",
+      "patient_groups": ["child"],
+      "name": "Home Care (Child)",
+      "symptoms": [],
+      "match": "default",
+      "risk": "HOME_CARE",
+      "protocol_ref": "WHO IMNCI - Counsel the Mother, Chart Booklet Module 7",
+      "explanation_key": "home_care_default"
+    },
+    {
+      "id": "HC-NEWBORN",
+      "patient_groups": ["newborn"],
+      "name": "Home Care (Newborn)",
+      "symptoms": [],
+      "match": "default",
+      "risk": "HOME_CARE",
+      "protocol_ref": "WHO IMNCI - Young Infant Care, Chart Booklet Module 6",
+      "explanation_key": "home_care_default"
+    },
+    {
+      "id": "HC-PREGNANT",
+      "patient_groups": ["pregnant"],
+      "name": "Normal Pregnancy",
+      "symptoms": [],
+      "match": "default",
+      "risk": "HOME_CARE",
+      "protocol_ref": "WHO Pregnancy Risk Screening / ASHA Module 7 - Normal Pregnancy Care",
+      "explanation_key": "pregnancy_normal"
+    },
+    {
+      "id": "HC-ADULT",
+      "patient_groups": ["adult"],
+      "name": "Home Care (Adult)",
+      "symptoms": [],
+      "match": "default",
+      "risk": "HOME_CARE",
+      "protocol_ref": "ASHA Module 6 - Home Care Guidance",
+      "explanation_key": "home_care_default"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex-between mb-3">
+  <h2>{{ t.cases_page.title }}</h2>
+  <div style="display: flex; gap: 0.5rem;">
+    <a href="{{ url_for('export_csv') }}" class="btn btn-outline" style="min-height: 40px; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+      📥 CSV
+    </a>
+    <a href="{{ url_for('export_json_route') }}" class="btn btn-outline" style="min-height: 40px; padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+      📥 JSON
+    </a>
+  </div>
+</div>
+
+<div class="card" style="padding: 0;">
+  {% if cases %}
+  <ul class="case-list">
+    {% for case in cases %}
+    <li>
+      <a href="{{ url_for('view_case', case_id=case.case_id) }}" class="case-item">
+        <span class="case-risk-dot {% if case.risk == 'URGENT_REFERRAL' %}urgent{% elif case.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}"></span>
+        <div class="case-info">
+          <div class="case-id">{{ case.case_id }}</div>
+          <div class="case-meta">
+            {{ case.patient_group|title }} • {{ case.age_months }}m • {{ case.created_at[:16]|replace('T', ' ') }}
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;">
+          <span class="badge {% if case.risk == 'URGENT_REFERRAL' %}badge-urgent{% elif case.risk == 'CLINIC_VISIT' %}badge-clinic{% else %}badge-home{% endif %}">
+            {{ case.risk|replace('_', ' ') }}
+          </span>
+          {% if case.sync_status == 'synced' %}
+          <span class="badge badge-synced">Synced</span>
+          {% else %}
+          <span class="badge badge-sync">Local</span>
+          {% endif %}
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">📁</div>
+    <p>{{ t.cases_page.no_cases }}</p>
+    <a href="{{ url_for('new_case') }}" class="btn btn-primary mt-2">
+      ➕ {{ t.nav.new_case }}
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

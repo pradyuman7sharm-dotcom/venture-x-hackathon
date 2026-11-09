@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-3">
+  <h1>{{ t.app_name }}</h1>
+  <p style="font-size: 1.1rem; color: var(--text-light);">{{ t.tagline }}</p>
+</div>
+
+<div class="mb-3">
+  <a href="{{ url_for('new_case') }}" class="btn btn-primary btn-lg">
+    ➕ {{ t.nav.new_case }}
+  </a>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-num">{{ stats.total_cases }}</div>
+    <div class="stat-label">{{ t.status_page.total_cases }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ stats.pending_count }}</div>
+    <div class="stat-label">{{ t.status_page.pending_sync }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">
+      {% if sync_status.is_online %}🟢{% else %}⚪{% endif %}
+    </div>
+    <div class="stat-label">{% if sync_status.is_online %}{{ t.status_page.online }}{% else %}{{ t.status_page.offline }}{% endif %}</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header flex-between">
+    <span>{{ t.cases_page.title }}</span>
+    <a href="{{ url_for('cases') }}" style="font-size: 0.85rem; color: var(--primary);">View All →</a>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    {% if recent_cases %}
+    <ul class="case-list">
+      {% for case in recent_cases %}
+      <li>
+        <a href="{{ url_for('view_case', case_id=case.case_id) }}" class="case-item">
+          <span class="case-risk-dot {% if case.risk == 'URGENT_REFERRAL' %}urgent{% elif case.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}"></span>
+          <div class="case-info">
+            <div class="case-id">{{ case.case_id }}</div>
+            <div class="case-meta">{{ case.patient_group|title }} • {{ case.age_months }}m • {{ case.created_at[:10] }}</div>
+          </div>
+          <div>
+            <span class="badge {% if case.risk == 'URGENT_REFERRAL' %}badge-urgent{% elif case.risk == 'CLINIC_VISIT' %}badge-clinic{% else %}badge-home{% endif %}">
+              {{ case.risk|replace('_', ' ') }}
+            </span>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty-state">
+      <div class="empty-icon">📁</div>
+      <p>{{ t.cases_page.no_cases }}</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

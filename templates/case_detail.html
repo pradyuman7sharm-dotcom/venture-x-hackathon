@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mb-2 no-print">
+  <a href="{{ url_for('cases') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+    {{ t.common.back }}
+  </a>
+</div>
+
+<div class="card" style="padding: 0; overflow: hidden;">
+  <div class="risk-banner {% if case.risk == 'URGENT_REFERRAL' %}urgent{% elif case.risk == 'CLINIC_VISIT' %}clinic{% else %}home{% endif %}">
+    <div class="risk-icon">
+      {% if case.risk == 'URGENT_REFERRAL' %}⚠️{% elif case.risk == 'CLINIC_VISIT' %}⚡{% else %}✅{% endif %}
+    </div>
+    <h2>{{ t.risk[case.risk] if case.risk in t.risk else case.risk }}</h2>
+    <p>{{ t.risk_description[case.risk] if case.risk in t.risk_description else '' }}</p>
+  </div>
+
+  <div class="card-body">
+    <div class="flex-between mb-2">
+      <div><strong>{{ t.cases_page.case_id }}:</strong> <code>{{ case.case_id }}</code></div>
+      <div>
+        {% if case.sync_status == 'synced' %}
+        <span class="badge badge-synced">{{ t.cases_page.synced }}</span>
+        {% else %}
+        <span class="badge badge-sync">{{ t.cases_page.saved_locally }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <strong>{{ t.cases_page.date }}:</strong> {{ case.created_at[:19]|replace('T', ' ') }}<br>
+      <strong>{{ t.cases_page.patient }}:</strong>
+      {{ t.patient_groups[case.patient_group] if case.patient_group in t.patient_groups else case.patient_group|title }}
+      • {{ case.age_months }} {{ t.step1.age_months }}
+      {% if case.gender %}• {{ case.gender|title }}{% endif %}
+    </div>
+
+    {% if case.symptoms %}
+    <div class="mb-3">
+      <strong>Symptoms Reported:</strong>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+        {% for sym in case.symptoms %}
+        <span class="badge" style="background: var(--border); color: var(--text);">
+          {{ t.symptoms[sym] if sym in t.symptoms else sym|replace('_', ' ')|title }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if case.symptom_text %}
+    <div class="mb-3">
+      <strong>Raw Note / Voice Input:</strong>
+      <p style="background: #FAFAFA; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+        {{ case.symptom_text }}
+      </p>
+    </div>
+    {% endif %}
+
+    <div class="mb-3">
+      <h3>{{ t.result.reasons_title }}</h3>
+      <ul class="reasons-list">
+        {% for reason in case.reasons %}
+        <li>{{ reason }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if case.protocol_refs %}
+    <div class="mb-3">
+      <h4>{{ t.result.protocol_title }}</h4>
+      <ul class="protocol-list">
+        {% for ref in case.protocol_refs %}
+        <li>{{ ref }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="mb-3">
+      <h4>Explanation:</h4>
+      <p style="background: #E3F2FD; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid #90CAF9;">
+        {{ case.explanation }}
+      </p>
+    </div>
+
+    <div class="no-print" style="display: flex; flex-direction: column; gap: 0.75rem;">
+      <a href="{{ url_for('pdf_card', case_id=case.case_id) }}" class="btn btn-primary btn-block">
+        📄 Download PDF Referral Card
+      </a>
+      <a href="{{ url_for('print_card', case_id=case.case_id) }}" class="btn btn-outline btn-block">
+        🖨️ {{ t.result.print_button }}
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

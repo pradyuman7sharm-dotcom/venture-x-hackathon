@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Referral Card - {{ case.case_id }}</title>
+  <style>
+    @page { size: A5; margin: 10mm; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 10px;
+      color: #111;
+      line-height: 1.4;
+      font-size: 13px;
+    }
+    .header {
+      border-bottom: 2px solid #1B5E20;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1B5E20;
+    }
+    .urgent-banner {
+      background: #FFEBEE;
+      border: 2px solid #C62828;
+      color: #C62828;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
+    .clinic-banner {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      color: #F57F17;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
+    .home-banner {
+      background: #E8F5E9;
+      border: 2px solid #2E7D32;
+      color: #2E7D32;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 12px;
+      border-radius: 4px;
+    }
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+    .meta-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #ddd;
+    }
+    .meta-table td.label {
+      font-weight: bold;
+      width: 35%;
+      color: #555;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      color: #1B5E20;
+      font-size: 13px;
+      border-bottom: 1px solid #ccc;
+    }
+    ul { margin: 4px 0 10px 20px; padding: 0; }
+    li { margin-bottom: 3px; }
+    .footer {
+      margin-top: 20px;
+      font-size: 10px;
+      color: #666;
+      border-top: 1px dashed #ccc;
+      padding-top: 8px;
+      text-align: center;
+    }
+    .no-print-bar {
+      background: #eee;
+      padding: 8px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .no-print-bar button {
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    @media print {
+      .no-print-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="no-print-bar">
+    <button onclick="window.print()">🖨️ Print This Referral Card</button>
+    <button onclick="window.history.back()">Back</button>
+  </div>
+
+  <div class="header">
+    <div class="brand">Sahaayak Pro — Referral Slip</div>
+    <div><strong>Generated Offline</strong></div>
+  </div>
+
+  <div class="{% if case.risk == 'URGENT_REFERRAL' %}urgent-banner{% elif case.risk == 'CLINIC_VISIT' %}clinic-banner{% else %}home-banner{% endif %}">
+    {{ case.risk|replace('_', ' ') }}
+  </div>
+
+  <table class="meta-table">
+    <tr>
+      <td class="label">Case ID:</td>
+      <td><code>{{ case.case_id }}</code></td>
+    </tr>
+    <tr>
+      <td class="label">Date / Time:</td>
+      <td>{{ case.created_at[:19]|replace('T', ' ') }}</td>
+    </tr>
+    <tr>
+      <td class="label">Patient Group:</td>
+      <td>{{ case.patient_group|title }}</td>
+    </tr>
+    <tr>
+      <td class="label">Age:</td>
+      <td>{{ case.age_months }} months</td>
+    </tr>
+    <tr>
+      <td class="label">Gender:</td>
+      <td>{{ case.gender|title if case.gender else 'N/A' }}</td>
+    </tr>
+  </table>
+
+  <div class="section-title">Clinical Findings & Reasons</div>
+  <ul>
+    {% for reason in case.reasons %}
+    <li>{{ reason }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if case.protocol_refs %}
+  <div class="section-title">Protocol Reference</div>
+  <ul>
+    {% for ref in case.protocol_refs %}
+    <li>{{ ref }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="section-title">Guidance for Patient / Attendant</div>
+  <p style="margin: 4px 0 10px 0; font-size: 12px;">{{ case.explanation }}</p>
+
+  <div class="footer">
+    Prototype decision-support tool. Does not diagnose disease. Must be clinically validated before real-world use.<br>
+    Sahaayak Pro • Offline IMNCI Decision Support
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      // Auto open print dialog if directly opened for printing
+    });
+  </script>
+</body>
+</html>
