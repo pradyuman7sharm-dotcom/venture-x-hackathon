@@ -365,12 +365,21 @@ def not_found(e):
     return render_template('404.html'), 404
 
 
+import argparse
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Sahaayak Pro - Offline Health Triage Server')
+    parser.add_argument('--port', type=int, default=int(os.environ.get('PORT', 8080)), help='Port to run the server on (default: 8080)')
+    parser.add_argument('--host', type=str, default=os.environ.get('HOST', '0.0.0.0'), help='Host to bind the server to (default: 0.0.0.0)')
+    args = parser.parse_args()
+
     init_db()
     sync_worker.start()
     print("\n" + "="*56)
     print("  Sahaayak Pro - Offline Health Triage Running")
-    print("  Local URL: http://localhost:5000")
+    print(f"  Local URL:    http://localhost:{args.port}")
+    print(f"  Network URL:  http://127.0.0.1:{args.port}")
+    print(f"  Hotspot/LAN:  http://{args.host}:{args.port}")
     print("  Mode: Fully Offline (Zero-Cloud / Zero-LLM)")
     print("="*56 + "\n")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host=args.host, port=args.port, debug=False)

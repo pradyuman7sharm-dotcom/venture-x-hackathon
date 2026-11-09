@@ -34,7 +34,7 @@ In rural health settings across India, Accredited Social Health Activist (ASHA) 
 
 ## 🛠️ Architecture & Tech Stack
 
-- **Backend**: Python 3.10+ with Flask (served locally on `http://localhost:5000` or `http://0.0.0.0:5000`).
+- **Backend**: Python 3.10+ with Flask (served locally on `http://localhost:8080`, configurable via `--port`).
 - **Database**: SQLite via Python's built-in `sqlite3` in WAL mode (`sahaayak_pro.db`).
 - **Rules Engine**: `triage/engine.py` evaluating `triage/rules.json` and matching multilingual phonetic/transliterated synonyms from `triage/keywords.json`.
 - **Frontend**: Jinja2 templates, vanilla CSS (`static/css/style.css`), and minimal vanilla JS (`static/js/app.js`). **Zero external CDNs or external font dependencies.**
@@ -117,9 +117,13 @@ pip install -r requirements.txt
 
 ### 4. Run the Application
 ```bash
+# Run on default port 8080:
 python app.py
+
+# Or choose any custom port you like (e.g. 5050, 8000, 3000):
+python app.py --port 8080
 ```
-Open your browser at: **`http://localhost:5000`** (or access from a local Wi-Fi hotspot on Android).
+Open your browser at: **`http://localhost:8080`** (or access from a local Wi-Fi hotspot on Android).
 
 ---
 
@@ -131,7 +135,7 @@ To demonstrate Sahaayak Pro's complete offline capabilities:
    - Turn on Airplane Mode on your laptop or phone, or disconnect Wi-Fi and mobile data.
 2. **Launch Sahaayak Pro**:
    - Run `python app.py`.
-   - Open `http://localhost:5000`.
+   - Open `http://localhost:8080`.
 3. **Verify Header Status**:
    - Observe the **`OFFLINE`** red badge in the header navigation bar.
 4. **Conduct a Triage Assessment**:
@@ -188,7 +192,7 @@ Sahaayak Pro runs natively on low-cost Android phones through Termux without roo
    ```bash
    python app.py
    ```
-5. Open Chrome on the phone and navigate to `http://localhost:5000`.
+5. Open Chrome on the phone and navigate to `http://localhost:8080`.
 6. Tap the Chrome menu → **Add to Home screen** for a full-screen, native app experience!
 
 ---
