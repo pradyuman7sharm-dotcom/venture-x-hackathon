@@ -253,3 +253,19 @@ Sahaayak Pro runs natively on low-cost Android phones through Termux without roo
 ## ⚠️ Disclaimer
 
 *Sahaayak Pro is a prototype clinical decision-support tool created to assist community healthcare workers in resource-constrained and offline environments. It does not provide medical diagnoses or replace licensed physicians. All rules and protocols must be clinically reviewed and validated by regional health authorities prior to real-world deployment.*
+
+---
+
+## 📸 Application Screenshots
+
+### 1. Dashboard
+![Sahaayak Pro Dashboard](screenshots/dashboard.png)
+
+### 2. Patient Registration
+![Patient Registration](screenshots/patient-registration.png)
+
+### 3. Symptom Assessment
+![Symptom Assessment](screenshots/symptom-assessment.png)
+
+### 4. Triage Results
+![Triage Results](screenshots/triage-result.png)
